@@ -8,16 +8,21 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate {
+class BusinessesViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var businesses: [Business]!
+    var businessesBackup: [Business]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = self;
         tableView.dataSource = self;
+        
+        searchBar.delegate = self;
 
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
@@ -59,6 +64,33 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
         
         cell.business = businesses[indexPath.row];
         return cell;
+    }
+    
+    // This method updates filteredData based on the text in the Search Box
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if(businessesBackup == nil) {
+            businessesBackup = businesses;
+        }
+        
+        // When there is no text, filteredData is the same as the original data
+        if searchText.isEmpty {
+            businesses = businessesBackup;
+        } else {
+            // The user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the
+            // item should NOT be included
+            businesses = businesses.filter({(dataItem: Business) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                if dataItem.name!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
+                    return true
+                } else {
+                    return false
+                }
+            })
+        }
+        tableView.reloadData()
     }
 
     /*
