@@ -88,7 +88,40 @@ class Business: NSObject {
         YelpClient.sharedInstance.searchWithTerm(term, completion: completion)
     }
     
-    class func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, completion: ([Business]!, NSError!) -> Void) -> Void {
-        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: categories, deals: deals, completion: completion)
+    
+    class func search(term: String, completion: ([Business]!, NSError!) -> Void) -> Void {
+        
+        var sort = YelpSortMode.BestMatched;
+        switch(appDelegate.searchFilter_sort) {
+        case "Sort2":
+            sort = YelpSortMode.Distance;
+        case "Sort3":
+            sort = YelpSortMode.HighestRated;
+        default:
+            sort = YelpSortMode.BestMatched;
+        }
+        
+        var deals: Bool?;
+        if(appDelegate.searchFilter_offeringDeal) {
+            deals = true;
+        }
+        
+        let metersPerBlock = 177;
+        let metersPerMile = 1609;
+        var radius: Int?;
+        switch(appDelegate.searchFilter_distance) {
+        case "Distance2":
+            radius = metersPerBlock * 2;
+        case "Distance3":
+            radius = metersPerBlock * 6;
+        case "Distance4":
+            radius = metersPerMile * 1;
+        case "Distance5":
+            radius = metersPerMile * 5;
+        default:
+            radius = nil;
+        }
+        
+        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: nil, deals: deals, radius: radius, completion: completion)
     }
 }

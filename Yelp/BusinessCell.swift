@@ -19,9 +19,11 @@ class BusinessCell: UITableViewCell {
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     
+    var itemNumber = 0;
+    
     var business: Business! {
         didSet {
-            nameLabel.text = business.name;
+            nameLabel.text = String(itemNumber) + ". " + business.name!;
             thumbImageView.setImageWithURL(business.imageURL!);
             categoriesLabel.text = business.categories;
             addressLabel.text = business.address;
@@ -32,12 +34,24 @@ class BusinessCell: UITableViewCell {
         }
     }
     
+    func setLabelWrappingWidth(label: UILabel) {
+        nameLabel.preferredMaxLayoutWidth = nameLabel.frame.size.width; // wrapping should occur if label is >= this width
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         thumbImageView.layer.cornerRadius = 3;
         thumbImageView.clipsToBounds = true;
+        
+        setLabelWrappingWidth(nameLabel);
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews();
+        
+        setLabelWrappingWidth(nameLabel);
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
