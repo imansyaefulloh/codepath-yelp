@@ -42,7 +42,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-[<img src='http://img.tejen.net/f9fe1d49e30c68307ffa4b1fb39b16cc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />](http://x.tejen.net/284)
+[<img src='http://img.tejen.net/4aa8eb5ca00b98dcf94736162d041d73.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />](http://x.tejen.net/js3)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
