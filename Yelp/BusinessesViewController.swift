@@ -62,17 +62,6 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
         
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged);
         tableView.insertSubview(refreshControl, atIndex: 0);
-
-/* Example of Yelp search with more search options specified
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            
-            for business in businesses {
-                print(business.name!)
-                print(business.address!)
-            }
-        }
-*/
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -87,6 +76,11 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
                 self.reloadSearch();
             }
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
     func searchLoadComplete() {
@@ -116,13 +110,9 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
         if let query = searchBar.text {
             searchTerm = query;
         }
+        
         appDelegate.search_term = searchTerm;
         Business.search(searchTerm, offset: offset, completion: completion);
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
@@ -148,6 +138,7 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
     
     func scrollViewWillBeginDragging(tableView: UIScrollView) {
         searchBar.endEditing(false);
+        self.resignFirstResponder();
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -214,5 +205,5 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
             mapVc.businesses = businesses;
         }
     }
-
+    
 }

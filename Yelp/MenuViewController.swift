@@ -11,6 +11,7 @@ import UIKit
 class MenuViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet weak var browser: UIWebView!
+    
     var businessId: String!;
     var webLoaded = false;
     
@@ -32,10 +33,13 @@ class MenuViewController: UIViewController, UIWebViewDelegate {
     
     func menuUnavailable() {
         let pageTitle = browser.stringByEvaluatingJavaScriptFromString(
+            // scrape the client to see what the webpage's window title is
             "document.title"
-        );  
+        );
         if(pageTitle == "Yelp - Error 404") {
             browser.hidden = true;
+            // UIWebView is now hidden
+            // so, the "Menu Unavailable" label underneath the UIWebView is now visible
         }
     }
     
@@ -50,16 +54,5 @@ class MenuViewController: UIViewController, UIWebViewDelegate {
             menuUnavailable();
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -11,13 +11,12 @@ import CoreLocation;
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
-    var window: UIWindow?
     let locationManager = CLLocationManager();
+    let prefs = NSUserDefaults.standardUserDefaults();
+    
+    var window: UIWindow?
     var BusinessesVC: UIViewController?;
     var BusinessesVCInitialUpdateDone = false;
-    
-    let prefs = NSUserDefaults.standardUserDefaults();
-
     var currentLocation: CLLocationCoordinate2D?;
     
     var latitudeLongitude : String = "37.785771,-122.406165" { // // default to San Francisco
@@ -25,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             prefs.setValue(latitudeLongitude, forKey: "latitudeLongitude");
         }
     }
+    
     var search_term : String = "" { // default to Best Match
         didSet {
             prefs.setValue(search_term, forKey: "search_term");
@@ -105,21 +105,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
                 let bVc = vc as! BusinessesViewController;
                 bVc.reloadSearch();
             }
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        switch status {
-        case .Authorized:
-            print("authorized")
-        case .AuthorizedWhenInUse:
-            print("authorized when in use")
-        case .Denied:
-            print("denied")
-        case .NotDetermined:
-            print("not determined")
-        case .Restricted:
-            print("restricted")
         }
     }
 

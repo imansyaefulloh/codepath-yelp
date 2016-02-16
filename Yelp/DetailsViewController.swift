@@ -122,7 +122,6 @@ class DetailsViewController: UIViewController {
         }
         categoriesLabel.text = categories.joinWithSeparator(", ");
         
-        
         reviewerPhoto.setImageWithURL(NSURL(string: data!["reviews"]![0]!["user"]!!["image_url"]! as! String)!);
         reviewerName.text = data!["reviews"]![0]!["user"]!!["name"]! as? String;
         review.text = data!["reviews"]![0]!["excerpt"]!! as? String;
@@ -141,6 +140,7 @@ class DetailsViewController: UIViewController {
             MKLaunchOptionsMapCenterKey: NSValue(MKCoordinate: regionSpan.center),
             MKLaunchOptionsMapSpanKey: NSValue(MKCoordinateSpan: regionSpan.span)
         ];
+        
         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
         let mapItem = MKMapItem(placemark: placemark)
         mapItem.name = business.name;
@@ -161,16 +161,16 @@ class DetailsViewController: UIViewController {
     func lowestReached(unit: String, value: Double) -> Bool {
         let value = Int(round(value));
         switch unit {
-        case "s":
-            return value < 60;
-        case "m":
-            return value < 60;
-        case "h":
-            return value < 24;
-        case "d":
-            return value < 60;
-        default: // include "w". cannot reduce weeks
-            return true;
+            case "s":
+                return value < 60;
+            case "m":
+                return value < 60;
+            case "h":
+                return value < 24;
+            case "d":
+                return value < 60;
+            default: // include "w". cannot reduce weeks
+                return true;
         }
     }
     
@@ -210,5 +210,5 @@ class DetailsViewController: UIViewController {
             menuViewController.businessId = business.id;
         }
     }
-
+    
 }

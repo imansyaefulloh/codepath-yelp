@@ -37,11 +37,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView {
         let reuseId = "pin"
         
         var pinView = map.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-        if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView?.canShowCallout = true
             

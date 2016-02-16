@@ -32,7 +32,6 @@ class BusinessCell: UITableViewCell {
             ratingCountLabel.text = "\(business.reviewCount!) Reviews";
             ratingImageView.setImageWithURL(business.ratingImageURL!);
             distanceLabel.text = business.distance;
-            
         }
     }
     

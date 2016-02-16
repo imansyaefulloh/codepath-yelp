@@ -32,8 +32,8 @@ class Business: NSObject {
         }
         
         let location = dictionary["location"] as? NSDictionary
-        latitude = location!["coordinate"]!["latitude"]! as? Double;
-        longitude = location!["coordinate"]!["longitude"]! as? Double;
+        latitude = location?["coordinate"]?["latitude"] as? Double;
+        longitude = location?["coordinate"]?["longitude"] as? Double;
         var address = ""
         if location != nil {
             let addressArray = location!["address"] as? NSArray
@@ -95,38 +95,37 @@ class Business: NSObject {
     }
     
     class func search(term: String, offset: Int = 0, completion: ([Business]!, NSError!) -> Void) -> Void {
-        
-        var sort = YelpSortMode.BestMatched;
-        switch(appDelegate.searchFilter_sort) {
-        case "Sort2":
-            sort = YelpSortMode.Distance;
-        case "Sort3":
-            sort = YelpSortMode.HighestRated;
-        default:
-            sort = YelpSortMode.BestMatched;
-        }
-        
         var deals: Bool?;
         if(appDelegate.searchFilter_offeringDeal) {
             deals = true;
+        }
+        
+        var sort = YelpSortMode.BestMatched;
+        switch(appDelegate.searchFilter_sort) {
+            case "Sort2":
+                sort = YelpSortMode.Distance;
+            case "Sort3":
+                sort = YelpSortMode.HighestRated;
+            default:
+                sort = YelpSortMode.BestMatched;
         }
         
         let metersPerBlock = 177;
         let metersPerMile = 1609;
         var radius: Int?;
         switch(appDelegate.searchFilter_distance) {
-        case "Distance2":
-            radius = metersPerBlock * 2;
-        case "Distance3":
-            radius = metersPerBlock * 6;
-        case "Distance4":
-            radius = metersPerMile * 1;
-        case "Distance5":
-            radius = metersPerMile * 5;
-        default:
-            radius = nil;
+            case "Distance2":
+                radius = metersPerBlock * 2;
+            case "Distance3":
+                radius = metersPerBlock * 6;
+            case "Distance4":
+                radius = metersPerMile * 1;
+            case "Distance5":
+                radius = metersPerMile * 5;
+            default:
+                radius = nil;
         }
         
-        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: nil, deals: deals, radius: radius, offset: offset, completion: completion)
+        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: nil, deals: deals, radius: radius, offset: offset, completion: completion);
     }
 }
