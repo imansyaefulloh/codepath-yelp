@@ -32,6 +32,7 @@ The following **additional** features are implemented:
 - [X] Pull-to-refresh (useful if your location has changed!)
 - [X] **Sort** by distance or rating
 - [X] **Filter** by multiple distance levels
+- [X] Search bars are connected to Yelp Search API (not limited to searching table view cells; can search for any local business)
 - [X] App Icon resembles the real Yelp app
 - [X] Launch screen resembles the real Yelp app
 - [X] Navigation bars, buttons, icons, and theme **resembles the real Yelp app**
@@ -40,13 +41,15 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+[<img src='http://img.tejen.net/f9fe1d49e30c68307ffa4b1fb39b16cc.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />](http://x.tejen.net/284)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Shakeel repairs EVERYTHING, not just iPhones... LOL
+
+Auto Layouts became much easier as I got the hang of it. One pro-tip we should have learned offically is the fact that you can Control+Drag from one storyboard element to another in order to relate both of them in a new Auto Layout constraint... for me, this was an essential technique, since there were occasions when an element couldn't "see" another element in drop-down menus when setting new constraints the "proper" way.
 
 ## License
 
