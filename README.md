@@ -1,8 +1,8 @@
-# Project 3 - *Name of App Here*
+# Project 3 - *Yelp*
 
-**Name of your app** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
+**Yelp** is a Yelp search app using the [Yelp API](http://www.yelp.com/developers/documentation/v2/search_api).
 
-Time spent: **7** hours spent in total
+Time spent: **12** hours spent in total
 
 ## User Stories
 
@@ -14,19 +14,27 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Search results page
-   - [ ] Infinite scroll for restaurant results.
-   - [ ] Implement map view of restaurant results.
-- [ ] Implement the restaurant detail page.
+- [X] Search results page
+   - [X] Infinite scroll for restaurant results.
+   - [X] Implement map view of restaurant results.
+- [X] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1. 
-2. 
+- [X] Uses **current location** to get relevant search results
+- [X] Explore a **restaurant's menu** from within the app
+- [X] **Call a business** from within the app
+- [X] Read a **review highlight** from within the app
+- [X] Tap to **get directions** to a business
+- [X] Map all search results; **tap a pin on the map** to segue to business details view
+- [X] Multiple navigation controllers with **Tab Bar**
+- [X] List of **categories** to search from (static table view controller)
+- [X] Pull-to-refresh (useful if your location has changed!)
+- [X] **Sort** by distance or rating
+- [X] **Filter** by multiple distance levels
+- [X] App Icon resembles the real Yelp app
+- [X] Launch screen resembles the real Yelp app
+- [X] Navigation bars, buttons, icons, and theme **resembles the real Yelp app**
 
 ## Video Walkthrough 
 
