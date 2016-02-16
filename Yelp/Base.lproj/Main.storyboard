@@ -532,19 +532,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kl-Cd-yaK">
-                                <rect key="frame" x="0.0" y="64" width="320" height="160"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kl-Cd-yaK">
+                                <rect key="frame" x="0.0" y="64" width="320" height="168"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="168" id="Yw8-zA-39d"/>
+                                </constraints>
                             </imageView>
-                            <visualEffectView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAx-E2-yQL">
-                                <rect key="frame" x="0.0" y="64" width="320" height="160"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YAx-E2-yQL">
+                                <rect key="frame" x="0.0" y="64" width="320" height="168"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" id="oll-DT-wWo">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="160"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="168"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <view alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9BX-TW-lF1">
-                                <rect key="frame" x="0.0" y="70" width="320" height="160"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="168"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="0.05 mi" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fba-Js-Xoj">
                                         <rect key="frame" x="260" y="29" width="52" height="21"/>
@@ -750,7 +753,6 @@
                         <constraints>
                             <constraint firstItem="wpf-gL-Wnp" firstAttribute="width" secondItem="Ptc-v5-5j4" secondAttribute="width" id="05m-ZA-fea"/>
                             <constraint firstItem="QYd-0x-0lp" firstAttribute="top" secondItem="wpf-gL-Wnp" secondAttribute="bottom" constant="16" id="DUd-11-XY5"/>
-                            <constraint firstItem="cS7-LQ-htg" firstAttribute="top" secondItem="QYd-0x-0lp" secondAttribute="bottom" constant="16" id="E4o-IR-UHU"/>
                             <constraint firstItem="wpf-gL-Wnp" firstAttribute="top" secondItem="3kl-Cd-yaK" secondAttribute="bottom" constant="16" id="Ihg-56-MIO"/>
                             <constraint firstItem="3kl-Cd-yaK" firstAttribute="top" secondItem="BnL-xG-NHP" secondAttribute="bottom" id="JCP-fm-lxn"/>
                             <constraint firstItem="9BX-TW-lF1" firstAttribute="width" secondItem="Ptc-v5-5j4" secondAttribute="width" id="K7C-qH-Ipi"/>
