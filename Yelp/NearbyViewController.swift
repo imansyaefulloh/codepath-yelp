@@ -32,6 +32,14 @@ class NearbyViewController: UIViewController, UISearchBarDelegate {
         searchBar.backgroundColor = UIColor.clearColor();
         searchBar.backgroundImage = UIImage();
         searchBar.delegate = self;
+        for subview in searchBar.subviews {
+            for subsubview in subview.subviews {
+                if (subsubview.isKindOfClass(NSClassFromString("UISearchBarBackground")!)) {
+                    subsubview.alpha = 0;
+                    break;
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

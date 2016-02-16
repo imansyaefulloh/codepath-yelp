@@ -193,7 +193,7 @@
                                                         <constraint firstItem="KKu-zY-hrD" firstAttribute="centerX" secondItem="bMs-bx-Chh" secondAttribute="centerX" id="fRc-TF-NMk"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
                                                     <rect key="frame" x="80" y="0.0" width="80" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efn-Ze-wWu">
@@ -872,9 +872,9 @@ Unavailable</string>
                                 <color key="backgroundColor" red="0.76470588235294112" green="0.14117647058823529" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Tqa-jo-SzG" firstAttribute="leading" secondItem="cKf-tf-hvz" secondAttribute="leading" constant="5" id="C48-88-qMv"/>
-                                    <constraint firstAttribute="bottom" secondItem="Tqa-jo-SzG" secondAttribute="bottom" constant="-2" id="PZF-KO-IUM"/>
+                                    <constraint firstAttribute="height" constant="50" id="TDN-ls-KXH"/>
                                     <constraint firstAttribute="trailing" secondItem="Tqa-jo-SzG" secondAttribute="trailing" constant="5" id="YEn-4a-0Qy"/>
-                                    <constraint firstItem="Tqa-jo-SzG" firstAttribute="top" secondItem="cKf-tf-hvz" secondAttribute="top" constant="-2" id="lQ1-sc-EfH"/>
+                                    <constraint firstItem="Tqa-jo-SzG" firstAttribute="top" secondItem="cKf-tf-hvz" secondAttribute="top" id="j5p-H8-Gbk"/>
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hAe-b0-Faf">
