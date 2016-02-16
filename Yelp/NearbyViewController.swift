@@ -31,7 +31,7 @@ class NearbyViewController: UIViewController, UISearchBarDelegate {
         searchBar.translucent = true;
         searchBar.backgroundColor = UIColor.clearColor();
         searchBar.backgroundImage = UIImage();
-        
+        searchBar.delegate = self;
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +39,12 @@ class NearbyViewController: UIViewController, UISearchBarDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.endEditing(false);
+        self.resignFirstResponder();
+        appDelegate.search_term = searchBar.text!;
+        appDelegate.switchToSearchTab();
+    }
 
     /*
     // MARK: - Navigation

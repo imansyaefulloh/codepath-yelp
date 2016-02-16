@@ -178,7 +178,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="Segment1" translatesAutoresizingMaskIntoConstraints="NO" id="bMs-bx-Chh">
+                                                <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment1" translatesAutoresizingMaskIntoConstraints="NO" id="bMs-bx-Chh">
                                                     <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKu-zY-hrD">
@@ -193,7 +193,7 @@
                                                         <constraint firstItem="KKu-zY-hrD" firstAttribute="centerX" secondItem="bMs-bx-Chh" secondAttribute="centerX" id="fRc-TF-NMk"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
                                                     <rect key="frame" x="80" y="0.0" width="80" height="43.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efn-Ze-wWu">

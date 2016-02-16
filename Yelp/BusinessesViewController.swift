@@ -113,12 +113,11 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
             tableView.alpha = 0;
             loadingSpinner.startAnimating();
         }
-        var searchTerms = "";
         if let query = searchBar.text {
-            searchTerms = query;
+            searchTerm = query;
         }
-        print(offset);
-        Business.search(searchTerms, offset: offset, completion: completion);
+        appDelegate.search_term = searchTerm;
+        Business.search(searchTerm, offset: offset, completion: completion);
     }
 
     override func didReceiveMemoryWarning() {
