@@ -3,7 +3,7 @@
 //  Yelp
 //
 //  Created by Tejen Hasmukh Patel on 1/31/16.
-//  Copyright © 2016 Timothy Lee. All rights reserved.
+//  Copyright © 2016 Tejen Patel. All rights reserved.
 //
 
 import UIKit
@@ -24,7 +24,9 @@ class BusinessCell: UITableViewCell {
     var business: Business! {
         didSet {
             nameLabel.text = String(itemNumber) + ". " + business.name!;
-            thumbImageView.setImageWithURL(business.imageURL!);
+            if let url = business.imageURL {
+                thumbImageView.setImageWithURL(url);
+            }
             categoriesLabel.text = business.categories;
             addressLabel.text = business.address;
             ratingCountLabel.text = "\(business.reviewCount!) Reviews";

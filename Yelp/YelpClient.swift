@@ -52,14 +52,16 @@ class YelpClient: BDBOAuth1RequestOperationManager {
         self.requestSerializer.saveAccessToken(token)
     }
     
-    func searchWithTerm(term: String, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(term: String, offset: Int = 0, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
         return searchWithTerm(term, sort: nil, categories: nil, deals: nil, radius: nil, completion: completion)
     }
     
-    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, radius: Int?, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
+    func searchWithTerm(term: String, sort: YelpSortMode?, categories: [String]?, deals: Bool?, radius: Int?, offset: Int = 0, completion: ([Business]!, NSError!) -> Void) -> AFHTTPRequestOperation {
         // For additional parameters, see http://www.yelp.com/developers/documentation/v2/search_api
+        
+        let limit = 20;
 
-        var parameters: [String : AnyObject] = ["term": term, "ll": appDelegate.latitudeLongitude]
+        var parameters: [String : AnyObject] = ["term": term, "ll": appDelegate.latitudeLongitude, "offset": offset * limit, "limit": limit]
 
         if sort != nil {
             parameters["sort"] = sort!.rawValue
@@ -82,6 +84,22 @@ class YelpClient: BDBOAuth1RequestOperationManager {
             }
             }, failure: { (operation: AFHTTPRequestOperation?, error: NSError!) -> Void in
                 completion(nil, error)
+        })!
+    }
+    
+    func lookupBusiness(id: String, completion: (NSDictionary!, NSError!) -> Void) -> AFHTTPRequestOperation {
+        // For additional parameters, see http://www.yelp.com/developers/documentation/v2/business
+        
+        let sanitizedId = id.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())!;
+        
+        return self.GET("business/\(sanitizedId)", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+            let dictionary = response as? NSDictionary;
+            print(dictionary);
+            if dictionary != nil {
+                completion(dictionary!, nil);
+            }
+            }, failure: { (operation: AFHTTPRequestOperation?, error: NSError!) -> Void in
+                completion(nil, error);
         })!
     }
 }

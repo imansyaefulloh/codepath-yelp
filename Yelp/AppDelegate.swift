@@ -2,8 +2,7 @@
 //  AppDelegate.swift
 //  Yelp
 //
-//  Created by Timothy Lee on 9/19/14.
-//  Copyright (c) 2014 Timothy Lee. All rights reserved.
+//  Copyright © 2016 Tejen Patel. All rights reserved.
 //
 
 import UIKit
@@ -14,12 +13,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     var window: UIWindow?
     let locationManager = CLLocationManager();
+    var BusinessesVC: UIViewController?;
+    var BusinessesVCInitialUpdateDone = false;
     
     let prefs = NSUserDefaults.standardUserDefaults();
+
+    var currentLocation: CLLocationCoordinate2D?;
     
     var latitudeLongitude : String = "37.785771,-122.406165" { // // default to San Francisco
         didSet {
             prefs.setValue(latitudeLongitude, forKey: "latitudeLongitude");
+        }
+    }
+    var search_term : String = "" { // default to Best Match
+        didSet {
+            prefs.setValue(search_term, forKey: "search_term");
         }
     }
     
@@ -28,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             prefs.setValue(searchFilter_distance, forKey: "searchFilter_distance");
         }
     }
-    var searchFilter_sort : String = "Sort1" { // default to Best Match
+    var searchFilter_sort : String = "Sort2" { // default to Distance
         didSet {
             prefs.setValue(searchFilter_sort, forKey: "searchFilter_sort");
         }
@@ -58,6 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager.requestWhenInUseAuthorization();
         locationManager.startUpdatingLocation();
         
+        if let term = prefs.stringForKey("search_term") {
+            search_term = term;
+        }
         if let distance = prefs.stringForKey("searchFilter_distance") {
             searchFilter_distance = distance;
         }
@@ -77,9 +88,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         return true
     }
     
+    func switchToSearchTab() {
+        if self.window!.rootViewController as? UITabBarController != nil {
+            var tababarController = self.window!.rootViewController as! UITabBarController;
+            tababarController.selectedIndex = 1
+        }
+    }
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locationManager.location! as CLLocation;
+        currentLocation = location.coordinate;
         latitudeLongitude = "\(location.coordinate.latitude),\(location.coordinate.longitude)";
+        if let vc = BusinessesVC {
+            if(!BusinessesVCInitialUpdateDone) {
+                BusinessesVCInitialUpdateDone = true;
+                let bVc = vc as! BusinessesViewController;
+                bVc.reloadSearch();
+            }
+        }
     }
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

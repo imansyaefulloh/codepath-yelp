@@ -2,13 +2,13 @@
 //  Business.swift
 //  Yelp
 //
-//  Created by Timothy Lee on 4/23/15.
-//  Copyright (c) 2015 Timothy Lee. All rights reserved.
+//  Copyright © 2016 Tejen Patel. All rights reserved.
 //
 
 import UIKit
 
 class Business: NSObject {
+    let id: String?;
     let name: String?
     let address: String?
     let imageURL: NSURL?
@@ -16,8 +16,12 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: NSURL?
     let reviewCount: NSNumber?
+    let latitude: Double?;
+    let longitude: Double?;
     
     init(dictionary: NSDictionary) {
+        id = dictionary["id"] as? String;
+        
         name = dictionary["name"] as? String
         
         let imageURLString = dictionary["image_url"] as? String
@@ -28,6 +32,8 @@ class Business: NSObject {
         }
         
         let location = dictionary["location"] as? NSDictionary
+        latitude = location!["coordinate"]!["latitude"]! as? Double;
+        longitude = location!["coordinate"]!["longitude"]! as? Double;
         var address = ""
         if location != nil {
             let addressArray = location!["address"] as? NSArray
@@ -88,8 +94,7 @@ class Business: NSObject {
         YelpClient.sharedInstance.searchWithTerm(term, completion: completion)
     }
     
-    
-    class func search(term: String, completion: ([Business]!, NSError!) -> Void) -> Void {
+    class func search(term: String, offset: Int = 0, completion: ([Business]!, NSError!) -> Void) -> Void {
         
         var sort = YelpSortMode.BestMatched;
         switch(appDelegate.searchFilter_sort) {
@@ -122,6 +127,6 @@ class Business: NSObject {
             radius = nil;
         }
         
-        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: nil, deals: deals, radius: radius, completion: completion)
+        YelpClient.sharedInstance.searchWithTerm(term, sort: sort, categories: nil, deals: deals, radius: radius, offset: offset, completion: completion)
     }
 }

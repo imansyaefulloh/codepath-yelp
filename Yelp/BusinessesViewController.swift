@@ -2,22 +2,27 @@
 //  BusinessesViewController.swift
 //  Yelp
 //
-//  Created by Timothy Lee on 4/23/15.
-//  Copyright (c) 2015 Timothy Lee. All rights reserved.
+//  Copyright © 2016 Tejen Patel. All rights reserved.
 //
 
 import UIKit
 
-class BusinessesViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class BusinessesViewController: UIViewController,  UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIScrollViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navFilter: UIBarButtonItem!;
     @IBOutlet weak var navMap: UIBarButtonItem!
     @IBOutlet weak var loadingSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var loadingMessageInitial: UILabel!
+    
+    let refreshControl = UIRefreshControl();
+    var isMoreDataLoading = false;
     
     var businesses: [Business]!
     var businessesBackup: [Business]!
     var searchBar: UISearchBar!;
+    var searchTerm = appDelegate.search_term;
+    var offset = 0;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +59,9 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
         button.addTarget(self, action: "buttonMap", forControlEvents:  UIControlEvents.TouchUpInside)
         navItem = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = navItem;
+        
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged);
+        tableView.insertSubview(refreshControl, atIndex: 0);
 
 /* Example of Yelp search with more search options specified
         Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
@@ -68,20 +76,59 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
     }
     
     override func viewWillAppear(animated: Bool) {
-        tableView.alpha = 0;
-        loadingSpinner.startAnimating();
-        Business.search("", completion: { (businesses: [Business]!, error: NSError!) -> Void in
+        searchTerm = appDelegate.search_term;
+        searchBar.text = searchTerm;
+        reloadSearch();
+        
+        appDelegate.BusinessesVC = self;
+        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(7))
+        dispatch_after(time, dispatch_get_main_queue()) {
+            if(self.businesses == nil) {
+                self.reloadSearch();
+            }
+        }
+    }
+    
+    func searchLoadComplete() {
+        reloadTable();
+        tableView.alpha = 1;
+        loadingMessageInitial.hidden = true;
+        loadingSpinner.stopAnimating();
+        refreshControl.endRefreshing();
+        isMoreDataLoading = false;
+    }
+    
+    func reloadSearch(offset: Int = 0) {
+        self.offset = offset;
+        var completion = { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
-            
-            self.reloadTable();
-            self.tableView.alpha = 1;
-            self.loadingSpinner.stopAnimating();
-        })
+            self.searchLoadComplete();
+        };
+        if(self.offset > 0) {
+            completion = { (businesses: [Business]!, error: NSError!) -> Void in
+                self.businesses.appendContentsOf(businesses);
+                self.searchLoadComplete();
+            };
+        } else {
+            tableView.alpha = 0;
+            loadingSpinner.startAnimating();
+        }
+        var searchTerms = "";
+        if let query = searchBar.text {
+            searchTerms = query;
+        }
+        print(offset);
+        Business.search(searchTerms, offset: offset, completion: completion);
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        offset = 0;
+        reloadSearch();
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,32 +157,17 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        
-        
         if(businessesBackup == nil) {
             businessesBackup = businesses;
         }
         
-        // When there is no text, filteredData is the same as the original data
         if searchText.isEmpty {
             businesses = businessesBackup;
             searchBar.endEditing(false);
         } else {
-            // The user has entered text into the search box
-            // Use the filter method to iterate over all items in the data array
-            // For each item, return true if the item should be included and false if the
-            // item should NOT be included
-            businesses = businesses.filter({(dataItem: Business) -> Bool in
-                // If dataItem matches the searchText, return true to include it
-                if dataItem.name!.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil {
-                    return true
-                } else {
-                    return false
-                }
-            })
+            offset = 0;
+            reloadSearch();
         }
-        tableView.reloadData()
     }
     
     func buttonFilter() {
@@ -146,7 +178,9 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
     }
     
     func buttonMap() {
-        print("clicked map");
+        if(businesses != nil) {
+            self.performSegueWithIdentifier("toMap", sender: self);
+        }
     }
     
     func reloadTable() {
@@ -155,12 +189,30 @@ class BusinessesViewController: UIViewController,  UITableViewDataSource, UITabl
         tableView.alpha = 1;
     }
     
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (!isMoreDataLoading) {
+            // Calculate the position of one screen length before the bottom of the results
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height - 1000;
+            
+            // When the user has scrolled past the threshold, start requesting
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.dragging) {
+                isMoreDataLoading = true
+                reloadSearch(++offset);
+            }
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "toDetails") {
             let cell = sender as! UITableViewCell;
             let indexPath = tableView.indexPathForCell(cell);
             let detailsVc = segue.destinationViewController as! DetailsViewController;
             detailsVc.business = businesses[indexPath!.row];
+        }
+        if(segue.identifier == "toMap") {
+            let mapVc = segue.destinationViewController as! MapViewController;
+            mapVc.businesses = businesses;
         }
     }
 
