@@ -177,7 +177,7 @@ class DetailsViewController: UIViewController {
     func timeSince(date: NSDate) -> String {
         var unit = "s";
         var timeSince = abs(date.timeIntervalSinceNow as Double); // in seconds
-        var reductionComplete = lowestReached(unit, value: timeSince);
+        let reductionComplete = lowestReached(unit, value: timeSince);
         
         while(reductionComplete != true){
             unit = "m";

@@ -90,8 +90,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     
     func switchToSearchTab() {
         if self.window!.rootViewController as? UITabBarController != nil {
-            var tababarController = self.window!.rootViewController as! UITabBarController;
-            tababarController.selectedIndex = 1
+            var TabBarController = self.window!.rootViewController as! UITabBarController;
+            TabBarController.selectedIndex = 1
         }
     }
     

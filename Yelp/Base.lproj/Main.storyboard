@@ -178,11 +178,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="Segment1" translatesAutoresizingMaskIntoConstraints="NO" id="bMs-bx-Chh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="43.5"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment1" translatesAutoresizingMaskIntoConstraints="NO" id="bMs-bx-Chh">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KKu-zY-hrD">
-                                                            <rect key="frame" x="19" y="11.5" width="42" height="21"/>
+                                                            <rect key="frame" x="19" y="12" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -193,11 +193,11 @@
                                                         <constraint firstItem="KKu-zY-hrD" firstAttribute="centerX" secondItem="bMs-bx-Chh" secondAttribute="centerX" id="fRc-TF-NMk"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
-                                                    <rect key="frame" x="80" y="0.0" width="80" height="43.5"/>
+                                                <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" restorationIdentifier="Segment2" translatesAutoresizingMaskIntoConstraints="NO" id="x7b-Ye-QDp">
+                                                    <rect key="frame" x="80" y="0.0" width="80" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Efn-Ze-wWu">
-                                                            <rect key="frame" x="19" y="11.5" width="42" height="21"/>
+                                                            <rect key="frame" x="19" y="12" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -209,10 +209,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment3" translatesAutoresizingMaskIntoConstraints="NO" id="AgY-gb-wfn">
-                                                    <rect key="frame" x="160" y="0.0" width="80" height="43.5"/>
+                                                    <rect key="frame" x="160" y="0.0" width="80" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUX-iV-IWp">
-                                                            <rect key="frame" x="19" y="11.5" width="42" height="21"/>
+                                                            <rect key="frame" x="19" y="12" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -224,10 +224,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="Segment4" translatesAutoresizingMaskIntoConstraints="NO" id="mMq-TS-v7s">
-                                                    <rect key="frame" x="240" y="0.0" width="80" height="43.5"/>
+                                                    <rect key="frame" x="240" y="0.0" width="80" height="44"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="$$$$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnJ-pN-4jR">
-                                                            <rect key="frame" x="19" y="11.5" width="42" height="21"/>
+                                                            <rect key="frame" x="19" y="12" width="42" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -268,7 +268,7 @@
                                                     <rect key="frame" x="258" y="6" width="51" height="31"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Offering a Deal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0G-Pc-G99">
-                                                    <rect key="frame" x="13" y="13" width="160.5" height="18"/>
+                                                    <rect key="frame" x="13" y="13" width="161" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
